@@ -1,4 +1,12 @@
 terraform {
+
+  backend "s3" {
+    bucket = "card-projecttt"
+    key    = "path/terraform.tfstate"
+    region = "ca-central-1"
+
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
