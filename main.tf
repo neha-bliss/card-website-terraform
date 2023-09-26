@@ -184,54 +184,6 @@ resource "aws_route_table_association" "RT-asso-1b-pvt" {
   route_table_id = aws_route_table.central_RT_Private.id 
 } 
 
-# #target group
-
-# resource "aws_lb_target_group" "card-web-TG-TF" {
-#   name     = "card-web-TG-TF"
-#   port     = 80
-#   protocol = "HTTP"
-#   vpc_id   = aws_vpc.central_vpc.id 
-# }
-
-
-# resource "aws_lb_target_group_attachment" "TG-instance-1" {
-#   target_group_arn = aws_lb_target_group.card-web-TG-TF.arn
-#   target_id        = aws_instance.web-1.id
-#   port             = 80
-# }
-
-# resource "aws_lb_target_group_attachment" "TG-instance-2" {
-#   target_group_arn = aws_lb_target_group.card-web-TG-TF.arn 
-#   target_id        = aws_instance.web-2.id
-#   port             = 80
-# }
-
-# #Load Balancer
-
-# resource "aws_lb" "card-web-LB-TF" {
-#   name               = "card-web-LB-TF"
-#   internal           = false 
-#   load_balancer_type = "application"
-#   security_groups    = [aws_security_group.ssh_http.id]
-#   subnets            = [aws_subnet.central_subnet_1a_public.id, aws_subnet.central_subnet_1b_public.id]
-
-#   tags = {
-#     Environment = "production"
-#   }
-# }
-
-# #Listner
-
-# resource "aws_lb_listener" "card-web-listener" {
-#   load_balancer_arn = aws_lb.card-web-LB-TF.arn
-#   port              = "80"
-#   protocol          = "HTTP"
-
-# default_action {
-#     type             = "forward"
-#     target_group_arn = aws_lb_target_group.card-web-TG-TF.arn
-#   }
-# }
 
 #creating the instances via ASG and we will attach the LB to it  
 
