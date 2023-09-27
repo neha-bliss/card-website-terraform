@@ -3,7 +3,7 @@ terraform {
   backend "s3" {
     bucket = "card-projecttt"
     key    = "path/terraform.tfstate"
-    region = "ca-central-1"
+    region = var.backend-region #"ca-central-1"
 
   }
 
@@ -16,7 +16,7 @@ terraform {
 }
 
 resource "aws_vpc" "central_vpc" {
-  cidr_block = "10.10.0.0/16"
+  cidr_block = var.vpc_cidr_block          #"10.10.0.0/16"
  
  tags = {
     Name = "Central_vpc"
@@ -71,7 +71,7 @@ resource "aws_subnet" "central_subnet_1b_private" {
 #Creating EC2 in subnets
 
 resource "aws_instance" "web-1" {
-  ami           = "ami-0ea18256de20ecdfc"
+  ami           = var.web-1-ami-id  #"ami-0ea18256de20ecdfc"
   instance_type = "t2.micro"
   key_name = "key-pair"
   subnet_id     = aws_subnet.central_subnet_1a_public.id
@@ -260,3 +260,4 @@ resource "aws_lb" "card-web-LB-terraform" {
     Environment = "production"
   }
 }
+
